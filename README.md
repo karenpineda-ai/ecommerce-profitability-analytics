@@ -119,6 +119,35 @@ descuento–margen · estacionalidad · top-10 productos por contribución al ma
 
 Las 10 figuras resultantes están en [`reports/figures/`](reports/figures/).
 
+### Vista previa de análisis
+
+> 🖼️ Figuras generadas con **Python (matplotlib/seaborn)** a partir del dataset
+> simulado. Sirven como anticipo de los análisis; el dashboard interactivo de
+> Power BI se documenta en [`powerbi/`](powerbi/).
+
+<table>
+  <tr>
+    <td width="50%"><img src="reports/figures/01_monthly_revenue_margin.png" width="100%"><br><sub><b>Revenue y margen mensual</b> — tendencia y estacionalidad.</sub></td>
+    <td width="50%"><img src="reports/figures/02_category_profit_margin.png" width="100%"><br><sub><b>Gross profit y margen por categoría</b> — dónde se gana y se pierde.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="reports/figures/03_volume_vs_margin.png" width="100%"><br><sub><b>Volumen vs. margen por producto</b> — alto volumen / bajo margen.</sub></td>
+    <td width="50%"><img src="reports/figures/04_channel_net_contribution.png" width="100%"><br><sub><b>Contribución neta por canal</b> — rentabilidad tras marketing.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="reports/figures/05_returns_by_category.png" width="100%"><br><sub><b>Devoluciones por categoría</b> — tasa de retorno y reembolsos.</sub></td>
+    <td width="50%"><img src="reports/figures/06_discount_vs_margin.png" width="100%"><br><sub><b>Descuento vs. margen</b> — impacto del descuento en la rentabilidad.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="reports/figures/07_shipping_by_region.png" width="100%"><br><sub><b>Costos de envío por región</b> — fugas logísticas por zona.</sub></td>
+    <td width="50%"><img src="reports/figures/08_rfm_segments.png" width="100%"><br><sub><b>Segmentos RFM</b> — distribución de la base de clientes.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="reports/figures/09_segments_size_value.png" width="100%"><br><sub><b>Tamaño y valor por segmento</b> — concentración de valor.</sub></td>
+    <td width="50%"><img src="reports/figures/10_segments_recency_frequency.png" width="100%"><br><sub><b>Recencia vs. frecuencia</b> — VIP, frecuentes y clientes en riesgo.</sub></td>
+  </tr>
+</table>
+
 ## 9. Indicadores (valores del dataset simulado)
 
 | Indicador | Valor |
