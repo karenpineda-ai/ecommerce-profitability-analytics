@@ -201,6 +201,22 @@ CLV Approx = DIVIDE ( [Gross Profit], [Customers With Orders] )
 ```
 Proxy simple de valor por cliente (gross profit por cliente). **Limitación:** no es un CLV probabilístico; no proyecta comportamiento futuro.
 
+### Conversions
+```DAX
+Conversions = SUM ( fact_marketing[conversions] )
+```
+Conversiones atribuidas al marketing (grano canal-día-campaña). Usada en la página
+*Marketing Performance*. *Contexto:* aplicar con `dim_channel`/`dim_date`; devuelve
+BLANK al cruzar con `dim_product` (marketing no tiene grano de producto).
+
+### Cost per Conversion
+```DAX
+Cost per Conversion = DIVIDE ( [Marketing Spend], [Conversions] )
+```
+Costo por conversión, por canal/campaña. *Contexto:* BLANK sin spend o sin
+conversiones; comparar entre canales (Email el más eficiente, Social Ads el más caro).
+`[Marketing Spend]` y `[Conversions]` deben compartir el mismo filtro de `dim_channel`.
+
 ---
 
 ## Notas transversales de contexto

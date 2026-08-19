@@ -29,6 +29,9 @@
 - **Hechos:** `fact_sales` (grano = línea de pedido), `fact_marketing` (grano = canal-día-campaña).
 - **Dimensiones:** `dim_date`, `dim_product`, `dim_customer`, `dim_channel`.
 - **Relaciones (Power BI):** de la dimensión (1) hacia el hecho (\*), dirección de filtro simple.
+- **Nomenclatura:** los nombres físicos (SQLite, CSVs, medidas DAX) son snake_case
+  (`fact_sales`, `dim_date`, …). `CLAUDE.md` describe el modelo lógico en PascalCase
+  (`FactSales`, `DimDate`, …); ambos nombran la misma tabla.
 
 | Relación | Desde | Hacia | Cardinalidad |
 |---|---|---|---|

@@ -41,12 +41,12 @@ Modelo dimensional tipo estrella:
 
 | Tabla | Tipo | Filas | Contenido |
 |---|---|---:|---|
-| `DimDate` | Dimensión | 547 | Calendario diario (año, trimestre, mes, semana, día) |
-| `DimProduct` | Dimensión | 60 | 8 categorías, marca, proveedor, costo, precio |
-| `DimCustomer` | Dimensión | 3,000 | Segmento, ciudad, región, canal y fecha de adquisición |
-| `DimChannel` | Dimensión | 6 | Canales de adquisición y su tipo |
-| `FactSales` | Hechos | 32,083 líneas / 20,000 pedidos | Ventas, costos, descuentos, envío, devoluciones |
-| `FactMarketing` | Hechos | 2,188 | Inversión, impresiones, clics y conversiones por canal/campaña |
+| `dim_date` | Dimensión | 547 | Calendario diario (año, trimestre, mes, semana, día) |
+| `dim_product` | Dimensión | 60 | 8 categorías, marca, proveedor, costo, precio |
+| `dim_customer` | Dimensión | 3,000 | Segmento, ciudad, región, canal y fecha de adquisición |
+| `dim_channel` | Dimensión | 6 | Canales de adquisición y su tipo |
+| `fact_sales` | Hechos | 32,083 líneas / 20,000 pedidos | Ventas, costos, descuentos, envío, devoluciones |
+| `fact_marketing` | Hechos | 2,188 | Inversión, impresiones, clics y conversiones por canal/campaña |
 
 Se inyectan **nulos e inconsistencias controladas** (~1%) de forma deliberada para
 ejercitar la capa de validación. Los datos crudos viven en `data/raw/` y los datos
@@ -66,8 +66,9 @@ generate_data.py → clean_data.py → validate_data.py → load_database.py →
                                     └──────────── Power BI (modelo estrella + DAX) ┘
 ```
 
-Modelo estrella: `FactSales` y `FactMarketing` rodeadas de `DimDate`,
-`DimProduct`, `DimCustomer` y `DimChannel`.
+Modelo estrella: `fact_sales` y `fact_marketing` rodeadas de `dim_date`,
+`dim_product`, `dim_customer` y `dim_channel` (nombres lógicos en PascalCase en
+`CLAUDE.md`; físicos en snake_case en la implementación).
 
 ## 5. Estructura de carpetas
 
