@@ -237,7 +237,7 @@ crear las medidas de [`powerbi/dax_measures.md`](powerbi/dax_measures.md) y cons
 - [x] **Fase 7** — Segmentación RFM
 - [x] **Fase 8** — Documentación y medidas DAX
 - [x] **Fase 9** — Documentación profesional y pruebas
-- [ ] **Fase 10** — Revisión final
+- [x] **Fase 10** — Revisión final: pipeline reproducido de cero (24/24 artefactos byte-idénticos), 27 pruebas en verde
 
 ## Contacto
 
