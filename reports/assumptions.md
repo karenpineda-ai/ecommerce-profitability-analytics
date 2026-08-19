@@ -29,7 +29,11 @@ trazabilidad de cada parámetro está en [`src/config.py`](../src/config.py).
 - **CAC** = `Marketing Spend / New Customers Acquired` (solo canales con inversión).
 - **ROAS** = `Revenue atribuido al canal / Marketing Spend`.
 - **Net Marketing Contribution** = `Gross Profit − Marketing Spend`.
-- **Return Rate** se reporta a **nivel de línea** (líneas devueltas / líneas totales).
+- **Return Rate** — la KPI titular (definición de `CLAUDE.md` y medida DAX) es a
+  **nivel de orden**: `órdenes con alguna devolución / órdenes totales`. El análisis
+  de devoluciones por categoría (`sql/02`, figura `05_returns_by_category.png`) reporta
+  **además** una tasa a **nivel de línea** (`return_rate_line_pct`) para dar granularidad
+  por categoría; ambas convivén y están etiquetadas de forma distinta para no confundirlas.
 
 ## 3. Atribución y segmentación
 

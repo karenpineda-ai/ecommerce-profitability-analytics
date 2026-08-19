@@ -113,13 +113,16 @@ LIMIT 10;
 -- name: returns_by_category
 -- PREGUNTA DE NEGOCIO:
 --   ¿Dónde se concentran las devoluciones y cuánto revenue reembolsan?
--- COLUMNAS: returned_lines, return_rate_line_pct, total_refund,
---   refund_pct_of_revenue.
+-- COLUMNAS: returned_lines, return_rate_line_pct, return_rate_order_pct,
+--   total_refund, refund_pct_of_revenue.
 -- ORDEN: return_rate_line_pct DESC.
--- CONSIDERACIONES: la tasa se calcula a nivel de LÍNEA de pedido (no de orden);
---   refund_amount es el monto efectivamente reembolsado.
+-- CONSIDERACIONES: se reportan AMBAS granularidades. La KPI titular "Return Rate"
+--   (CLAUDE.md y la medida DAX) es a nivel de ORDEN = órdenes con alguna devolución
+--   / órdenes totales (return_rate_order_pct). Se añade la tasa a nivel de LÍNEA
+--   (return_rate_line_pct) para dar granularidad por categoría. refund_amount es el
+--   monto efectivamente reembolsado.
 WITH line AS (
-    SELECT p.category, f.returned_flag, f.refund_amount,
+    SELECT p.category, f.order_id, f.returned_flag, f.refund_amount,
            (f.quantity*f.unit_price - f.discount_amount + f.shipping_revenue) AS revenue
     FROM fact_sales f
     JOIN dim_product p ON f.product_id = p.product_id
@@ -129,6 +132,8 @@ SELECT
     COUNT(*)                                              AS lines,
     SUM(returned_flag)                                    AS returned_lines,
     ROUND(100.0 * SUM(returned_flag) / COUNT(*), 2)       AS return_rate_line_pct,
+    ROUND(100.0 * COUNT(DISTINCT CASE WHEN returned_flag = 1 THEN order_id END)
+          / NULLIF(COUNT(DISTINCT order_id), 0), 2)       AS return_rate_order_pct,
     ROUND(SUM(refund_amount), 2)                          AS total_refund,
     ROUND(100.0 * SUM(refund_amount) / NULLIF(SUM(revenue), 0), 2) AS refund_pct_of_revenue
 FROM line
