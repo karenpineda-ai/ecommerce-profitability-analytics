@@ -204,3 +204,55 @@ def summarize(results: list[ValidationResult]) -> dict[str, int]:
 
 def has_blocking_errors(results: list[ValidationResult]) -> bool:
     return any(r.blocking for r in results)
+
+
+# --------------------------------------------------------------------------
+# CLI entry point
+# --------------------------------------------------------------------------
+def _load_raw_tables() -> dict[str, pd.DataFrame]:
+    """Load the raw CSVs into a table dict keyed as ``run_all_validations`` expects.
+
+    Loading is done here (rather than reusing ``clean_data.load_raw``) to avoid a
+    circular import: ``clean_data`` already imports this module.
+    """
+    return {
+        name: pd.read_csv(config.RAW_DATA_DIR / fname)
+        for name, fname in config.RAW_FILES.items()
+    }
+
+
+def main() -> int:
+    """Run every validation rule against ``data/raw`` and print a report.
+
+    Returns a process exit code: ``0`` when no blocking (critical) errors are
+    found, ``1`` otherwise, so the command can gate a CI pipeline.
+    """
+    tables = _load_raw_tables()
+    results = run_all_validations(tables)
+
+    print(f"Validating raw data in {config.RAW_DATA_DIR}")
+    print("-" * 78)
+    for r in sorted(results, key=lambda x: (x.severity != "critical", x.table, x.rule)):
+        status = "OK  " if r.passed else ("BLOCK" if r.blocking else "WARN ")
+        print(f"  [{status}] {r.severity:<8} {r.table:<15} {r.rule:<28} "
+              f"errors={r.n_errors:>6}  {r.message}")
+    print("-" * 78)
+
+    summary = summarize(results)
+    print(
+        "  rules={rules} passed={passed} failed={failed} "
+        "critical={critical_failures} warnings={warnings} "
+        "total_errors={total_errors}".format(**summary)
+    )
+
+    if has_blocking_errors(results):
+        print("  [BLOCKED] Critical errors present. Fix before loading the database.")
+        return 1
+    print("  [OK] No blocking errors. Data ready for cleaning / load.")
+    return 0
+
+
+if __name__ == "__main__":
+    import sys
+
+    sys.exit(main())

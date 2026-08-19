@@ -208,12 +208,12 @@ python -m pip install -r requirements.txt
 ```bash
 python -m src.generate_data          # genera datos simulados en data/raw/
 python -m src.clean_data             # limpieza → data/processed/
-python -m src.validate_data          # 15 validaciones de calidad
+python -m src.validate_data          # 31 reglas de calidad sobre data/raw/
 python -m src.load_database          # construye database/ecommerce.db
 python -m src.run_sql                # ejecuta sql/01–05 → analysis_outputs/
 python -m src.analysis               # KPIs + figuras en reports/figures/
 python -m src.customer_segmentation  # RFM → data/processed/customer_rfm.csv
-pytest -q                            # 13 pruebas de calidad y cálculos
+pytest -q                            # 27 pruebas de calidad y cálculos
 ```
 
 La semilla fija garantiza que **todos los resultados son idénticos en cada ejecución**.
