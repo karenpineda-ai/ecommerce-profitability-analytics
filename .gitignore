@@ -1,0 +1,64 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.python-version
+
+# === Testing / coverage ===
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# === Environment variables / secrets ===
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+secrets.*
+
+# === SQLite / generated database ===
+# The database is reproducible from source; do not version it.
+database/*.db
+database/*.sqlite
+database/*.sqlite3
+
+# === Generated / regenerable data ===
+# Raw and processed datasets are produced by the pipeline (fixed seed).
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# === Editors / IDE ===
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Reports build artifacts (keep source .md, ignore exports) ===
+reports/*.pdf
+reports/*.html

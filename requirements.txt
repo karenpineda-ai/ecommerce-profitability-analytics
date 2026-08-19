@@ -1,0 +1,22 @@
+# E-commerce Profitability Analytics — Python dependencies
+# Install with:  python -m pip install -r requirements.txt
+# Pinned to compatible ranges for reproducibility.
+
+# --- Core data stack ---
+pandas>=2.2,<3.1
+numpy>=1.26,<3.0
+
+# --- Visualization (exploratory analysis) ---
+matplotlib>=3.8,<4.0
+seaborn>=0.13,<0.14
+
+# --- Testing ---
+pytest>=8.0,<9.0
+
+# --- Notebooks ---
+jupyter>=1.0
+notebook>=7.0
+
+# --- Optional (uncomment if needed) ---
+# scikit-learn>=1.4,<2.0   # only if RFM/segmentation requires clustering
+# openpyxl>=3.1,<4.0       # only if exporting to Excel
